@@ -1,13 +1,17 @@
+import React, { useState } from "react";
 import Navbar from "./components/Layout/Navbar";
+import CounterContainer from "./components/common/counter/CounterContainer";
 import ItemListContainer from "./components/pages/ItemListContainer/ItemListContainer";
 
 function App() {
-  let nombre = "Paula";
+   const [montar, setMontar] = useState(false);
+
 
   return (
     <main>
       <Navbar />
-      <ItemListContainer nombre={nombre} />
+      <CounterContainer/>
+      <ItemListContainer/>
     </main>
   );
 }
