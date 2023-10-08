@@ -1,10 +1,17 @@
-function ItemList({nombre}) {
-    return (
-        <div className="text-center ">
-          <h2 className="font-bold">Bienvenida!! {nombre} </h2>
-          <h3>Aca podras encontrar el listado de los productos de tecnologia</h3>
-        </div>
-      );
-    }
+import ProductCard from "../../common/ProductCard/ProductCard";
 
-export default ItemList
+function ItemList({ items }) {
+  return (
+    <section className="grid grid-cols-4 items-center	">
+      {
+        items.map((item) => {
+          return <ProductCard key={item.id} item={item} />
+        })
+      }
+
+
+    </section>
+  )
+}
+
+export default ItemList;
