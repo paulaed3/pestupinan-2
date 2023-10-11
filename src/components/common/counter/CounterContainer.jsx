@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import CounterPresentacional from "./Counter";
+import Counter from "./Counter";
 
 
-function CounterContainer({ stock }) {
+function CounterContainer({ stock , onAdd}) {
     const [contador, setContador] = useState(1);
-    const [nombre, setNombre] = useState("Andrea");
+    
 
     const sumar = () => {
         if (contador < stock) {
@@ -22,20 +22,16 @@ function CounterContainer({ stock }) {
         }
     };
 
-    useEffect(() => {
-       
-        console.log("Se realizo una peticion");
-    }, []); 
-
-    console.log("montaje o actualizacion");
+ 
 
     return (
-        <CounterPresentacional
+        <Counter
+        
             sumar={sumar}
             restar={restar}
             contador={contador}
-            nombre={nombre}
-            setNombre={setNombre}
+            onAdd= {onAdd}
+           
         />
     );
 }
