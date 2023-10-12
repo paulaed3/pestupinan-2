@@ -4,7 +4,7 @@ import CounterContainer from "../../common/counter/CounterContainer";
 function ItemDetail({ product , onAdd }) {
   return (
     
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center mt-10">
     <div className="border-inherit border-2 rounded-2xl p-6 w-auto">
       <img src={product.img} alt={product.title} className="w-2/3 mx-auto" />
       <div className="">

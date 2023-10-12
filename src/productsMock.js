@@ -32,7 +32,7 @@
         price: 399.99,
         stock: 12,
         description: "Android con excelente cámara Leica y zoom",
-        category: "Computadoras",
+        category: "Teléfonos",
         img: "https://i.dummyjson.com/data/products/5/2.jpg"
     },
     {
@@ -68,7 +68,7 @@
         price: 199.99,
         stock:12,
         description: "Laptop económica para tareas diarias.",
-        category: "Teléfonos",
+        category: "Computadoras",
         img: "https://i.dummyjson.com/data/products/9/4.jpg"
     },
     
