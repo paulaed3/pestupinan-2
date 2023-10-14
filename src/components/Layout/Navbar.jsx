@@ -6,14 +6,10 @@ function Navbar() {
     <>
       <div className="bg-indigo-400">
         <nav className="py-4 flex justify-between items-center p-3">
-         
-        <Link to="/">
-          
-              <a className="text-white font-bold text-2xl">NOVATECH</a>
-            
-            </Link>
-         
-          
+          <Link className="text-white font-bold text-2xl" to="/">
+            NOVATECH
+          </Link>
+
           <ul className="text-white flex gap-12 ml-auto">
             <li>
               <Link to="/category/Computadoras">Computadoras</Link>
@@ -29,7 +25,6 @@ function Navbar() {
           <Cartwidget />
         </nav>
       </div>
-      
     </>
   );
 }

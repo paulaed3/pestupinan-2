@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function CartContainer() {
-  return (
-    <div>Carrito</div>
-  )
+  return <div>Carrito</div>;
 }
 
-export default CartContainer
+export default CartContainer;
