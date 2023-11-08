@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Counter from "./Counter";
 
-function CounterContainer({ stock, onAdd }) {
-  const [contador, setContador] = useState(1);
+function CounterContainer({ stock, onAdd , initial=1}) {
+  const [contador, setContador] = useState(initial);
 
   const sumar = () => {
     if (contador < stock) {
