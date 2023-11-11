@@ -1,34 +1,40 @@
 import { useState, useEffect } from "react";
-import { products } from "../../../productsMock";
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
 import SyncLoader from "react-spinners/SyncLoader";
+import { getDocs, collection, query, where} from "firebase/firestore";
+import { db } from "../../../firebaseConfig";
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Nuevo estado para la carga
-
+  const [isLoading, setIsLoading] = useState(true);
   const { categoryName } = useParams();
 
   useEffect(() => {
-    setIsLoading(true); // Indicar que se está cargando
+    let productsCollection = collection(db, "products");
 
-    const productosFiltrados = products.filter(
-      (product) => product.category === categoryName
-    );
+    let consulta = undefined;
 
-    const tarea = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(categoryName ? productosFiltrados : products);
-      },800);
+    if (!categoryName) {
+      consulta = productsCollection;
+    } else {
+      consulta = query(
+        productsCollection,
+        where("category", "==", categoryName)
+      );
+    }
+
+    setIsLoading(true);
+
+    getDocs(consulta).then((res) => {
+      let newArray = res.docs.map((product) => {
+        return { ...product.data(), id: product.id };
+      });
+      let arrayFiltrado = newArray.filter((elemento)=> elemento.stock > 0)
+      setItems(arrayFiltrado);
+      
+      setIsLoading(false);
     });
-
-    tarea
-      .then((res) => {
-        setItems(res);
-        setIsLoading(false); // Indicar que la carga ha terminado
-      })
-      .catch((error) => console.log(error));
   }, [categoryName]);
 
   return (
@@ -42,7 +48,6 @@ const ItemListContainer = () => {
       )}
     </div>
   );
-  
 };
 
 export default ItemListContainer;

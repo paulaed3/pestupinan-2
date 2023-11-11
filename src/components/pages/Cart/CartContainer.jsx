@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "../../../context/CartContext";
+import { CartContext } from "../../../context/CartContext"; 
 import Swal from "sweetalert2";
 import { AiOutlineDelete } from "react-icons/ai";
 
@@ -55,15 +55,13 @@ function CartContainer() {
           <img className="rounded-lg w-40 h-40" src={product.img} alt="" />
           <div className="ml-8">
             <h2 className="text-xl font-semibold mb-3">{product.title}</h2>
-            <h2 className="text-xl font-semibold mb-3">{product.price}</h2>
+            <h2 className="text-xl font-semibold mb-3">${product.price}</h2>
             <h2 className="text-gray-600">Cantidad: {product.quantity}</h2>
             <button
               className="border rounded-sm mt-4"
               onClick={() => deleteProductWithAlert(product.id)}
             >
-              <AiOutlineDelete
-                className="w-6 h-auto text-rose-600	"
-              />
+              <AiOutlineDelete className="w-6 h-auto text-rose-600	" />
             </button>
           </div>
         </div>
@@ -87,6 +85,8 @@ function CartContainer() {
               Vaciar Carrito
             </button>
           </div>
+
+          
         </div>
       )}
     </div>
@@ -94,3 +94,5 @@ function CartContainer() {
 }
 
 export default CartContainer;
+
+

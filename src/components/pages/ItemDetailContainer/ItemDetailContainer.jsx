@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { products } from "../../../productsMock";
 import ItemDetail from "./ItemDetail";
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../../context/CartContext";
 import Swal from "sweetalert2";
+import { db } from "../../../firebaseConfig";
+import { getDoc, collection, doc } from "firebase/firestore";
 function ItemDetailContainer() {
   const [productSelected, setProductSelected] = useState({});
   const [showCounter, setShowCounter] = useState(true);
@@ -11,18 +12,17 @@ function ItemDetailContainer() {
 
   let { addToCart, getQuantityById } = useContext(CartContext);
 
-  let totalQuantity = getQuantityById(+id);
+  let totalQuantity = getQuantityById(id);
   console.log(totalQuantity);
 
   useEffect(() => {
-    let producto = products.find((product) => product.id === +id);
-    const getproduct = new Promise((resolve, reject) => {
-      resolve(producto);
-    });
+    let itemCollection = collection(db, "products");
 
-    getproduct
-      .then((res) => setProductSelected(res))
-      .catch((err) => console.log(err));
+    let refDoc = doc(itemCollection, id);
+
+    getDoc(refDoc).then((res) => {
+      setProductSelected({ id: res.id, ...res.data() });
+    });
   }, [id]);
 
   const onAdd = (cantidad) => {
@@ -43,7 +43,6 @@ function ItemDetailContainer() {
 
     setShowCounter(false);
   };
-
 
   return (
     <ItemDetail
