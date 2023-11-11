@@ -8,12 +8,13 @@ import { getDoc, collection, doc } from "firebase/firestore";
 function ItemDetailContainer() {
   const [productSelected, setProductSelected] = useState({});
   const [showCounter, setShowCounter] = useState(true);
+
+  const [maxQuantity, setMaxQuantity] = useState(0);
+
   let { id } = useParams();
 
   let { addToCart, getQuantityById } = useContext(CartContext);
-
-  let totalQuantity = getQuantityById(id);
-  console.log(totalQuantity);
+  let quantity = getQuantityById(id);
 
   useEffect(() => {
     let itemCollection = collection(db, "products");
@@ -44,12 +45,27 @@ function ItemDetailContainer() {
     setShowCounter(false);
   };
 
+  // calculate max stock with cart
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const productInStoreCart =
+      storedCart.find(
+        (productStore) => productStore.id === productSelected.id
+      ) || {};
+    const { quantity = 0 } = productInStoreCart;
+    const maxToAdd = Math.max(0, productSelected.stock - quantity);
+    if (maxToAdd === 0) setShowCounter(false);
+    else setMaxQuantity(maxToAdd);
+  }, [productSelected]);
+
   return (
     <ItemDetail
       showCounter={showCounter}
       product={productSelected}
       onAdd={onAdd}
-      initial={totalQuantity}
+      initial={quantity}
+      initialCounter={quantity}
+      maxQuantity={maxQuantity}
     />
   );
 }

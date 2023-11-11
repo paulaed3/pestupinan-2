@@ -3,15 +3,21 @@ import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import CounterContainer from "../../common/counter/CounterContainer";
 
-function ItemDetail({ product, onAdd, initial, showCounter }) {
+function ItemDetail({
+  product,
+  onAdd,
+  initialCounter,
+  showCounter,
+  maxQuantity,
+}) {
   return (
     <div className="flex justify-center items-center mt-10">
       <div className="border-inherit border-2 rounded-2xl p-6 w-auto">
         <img src={product.img} alt={product.title} className="w-2/3 mx-auto" />
         <div className="">
-          {initial && (
-            <h5 className="mt-4 text-indigo-500	font-bold	">
-              Ya tienes {initial} unidad(es) en el carrito
+          {initialCounter && (
+            <h5 className="mt-4 text-indigo-500 font-bold">
+              Ya tienes {initialCounter} unidad(es) en el carrito
             </h5>
           )}
 
@@ -22,15 +28,15 @@ function ItemDetail({ product, onAdd, initial, showCounter }) {
           {showCounter ? (
             <div>
               <CounterContainer
-                stock={product.stock}
+                stock={maxQuantity}
                 onAdd={onAdd}
-                initial={initial}
+                initialCounter={initialCounter}
               />
             </div>
           ) : (
             <Link to="/cart" className="flex items-center justify-center">
               <div className=" bg-violet-400 rounded-full mt-3 p-3">
-                <AiOutlineShoppingCart className=" w-8 h-auto  " />
+                <AiOutlineShoppingCart className="w-8 h-auto" />
               </div>
             </Link>
           )}
