@@ -57,7 +57,7 @@
          title: "Microsoft Surface Laptop 4",
          price: 899,
          stock: 6,
-         description: "Laptop Windows confiable y delgada",
+         description: " Laptop Windows confiable y delgada",
          category: "Computadoras",
          img: "https://i.dummyjson.com/data/products/8/thumbnail.jpg"
      },
