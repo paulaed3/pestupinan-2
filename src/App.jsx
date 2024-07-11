@@ -1,14 +1,11 @@
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/Router/AppRouter";
 import CartContextComponent from "./context/CartContext";
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 
-
-
+ReactGA.initialize("G-YEVPQS1MPE");
+ReactGA.send("pageview");
 function App() {
-
-    ReactGA.initialize('G-YEVPQS1MPE');
-    ReactGA.pageview(window.location.pathname + window.location.search);
   return (
     <BrowserRouter>
       <CartContextComponent>
@@ -18,4 +15,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
